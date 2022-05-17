@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmethira <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmethira <pmethira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 21:11:00 by pmethira          #+#    #+#             */
-/*   Updated: 2022/02/22 14:55:51 by pmethira         ###   ########.fr       */
+/*   Updated: 2022/05/17 12:12:13 by pmethira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,32 @@
 
 int	ft_atoi(const char *str)
 {
-	char	*p;
-	int		i;
 	int		pre;
 	int		ans;
 
-	i = 0;
-	p = (char *)str;
 	pre = 1;
 	ans = 0;
-	while (p[i] == 32 || (p[i] >= 9 && p[i] <= 13))
-		i++;
-	if (p[i] == '-' || p[i] == '+')
+	while (*str == ' ' || *str == '\t' || *str == '\n'
+		|| *str == '\v' || *str == '\f' || *str == '\r')
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		if (p[i] == '-')
+		if (*str == '-')
 			pre = -1;
-		i++;
+		str++;
 	}
-	while (p[i] >= '0' && p[i] <= '9')
+	while (*str >= '0' && *str <= '9')
 	{
-		ans = ans * 10 + (p[i] - '0');
-		i++;
+		ans = ans * 10 + (*str - '0');
+		str++;
 	}
 	return (pre * ans);
+}
+
+#include<stdio.h>
+
+int		main(int ac, char **av)
+{
+	printf("%d\n",ft_atoi(av[1]));
+	return 0;
 }
